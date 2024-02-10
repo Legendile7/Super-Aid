@@ -3,27 +3,4 @@
           package="com.google.firebase.app.unity"
           android:versionCode="1"
           android:versionName="1.0">
-
-    <!-- Add permissions -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> <!-- Permission to receive boot completed broadcast -->
-    <uses-permission android:name="android.permission.WAKE_LOCK"/> <!-- Permission to acquire wake locks -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/> <!-- Permission for foreground services -->
-
-    <!-- Declare receiver for boot completed event -->
-    <application ...>
-        <receiver android:name=".BootReceiver"
-                  android:enabled="true"
-                  android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            </intent-filter>
-        </receiver>
-
-        <!-- Declare service for background tasks -->
-        <service android:name=".BackgroundService"
-                 android:enabled="true"
-                 android:exported="false"
-                 android:permission="android.permission.BIND_JOB_SERVICE">
-        </service>
-    </application>
 </manifest>

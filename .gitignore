@@ -73,3 +73,5 @@ crashlytics-build.properties
 .plastic/plastic.selector
 .plastic/plastic.wktree
 .plastic/plastic.workspace
+.plastic/plastic.branchexplorer
+.plastic/plastic.changes

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mobile.notifications@2.3.1/Runtime/Runtime.iml" filepath="$PROJECT_DIR$/Library/PackageCache/com.unity.mobile.notifications@2.3.1/Runtime/Runtime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Supergency.iml" filepath="$PROJECT_DIR$/.idea/Supergency.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mobile.notifications@2.3.1/Tests/Tests.iml" filepath="$PROJECT_DIR$/Library/PackageCache/com.unity.mobile.notifications@2.3.1/Tests/Tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Library/PackageCache/com.unity.adaptiveperformance.samsung.android@5.0.0/com.unity.adaptiveperformance.samsung.android@5.0.0.iml" filepath="$PROJECT_DIR$/Library/PackageCache/com.unity.adaptiveperformance.samsung.android@5.0.0/com.unity.adaptiveperformance.samsung.android@5.0.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Library/PramData/AndroidApplicationController/Cache/com.overshock.supergency/gradle-project/unityLibrary/mobilenotifications.androidlib/mobilenotifications.androidlib.iml" filepath="$PROJECT_DIR$/Library/PramData/AndroidApplicationController/Cache/com.overshock.supergency/gradle-project/unityLibrary/mobilenotifications.androidlib/mobilenotifications.androidlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/mobilenotifications.androidlib/mobilenotifications.androidlib1.iml" filepath="$PROJECT_DIR$/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/mobilenotifications.androidlib/mobilenotifications.androidlib1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Library/PramData/AndroidApplicationController/Cache/com.overshock.supergency/gradle-project/unityLibrary/src/unityLibrary.iml" filepath="$PROJECT_DIR$/Library/PramData/AndroidApplicationController/Cache/com.overshock.supergency/gradle-project/unityLibrary/src/unityLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/unityLibrary1.iml" filepath="$PROJECT_DIR$/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/unityLibrary1.iml" />
+    </modules>
+  </component>
+</project>
