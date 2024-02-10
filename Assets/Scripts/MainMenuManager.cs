@@ -149,6 +149,7 @@ public class MainMenuManager : MonoBehaviour
     }
     private void Start()
     {
+        /*
         var notificationIntentData = AndroidNotificationCenter.GetLastNotificationIntent();
         if (notificationIntentData != null)
         {
@@ -157,6 +158,7 @@ public class MainMenuManager : MonoBehaviour
             string url = "https://www.google.com/maps/dir/?api=1" + notification.IntentData;
             Application.OpenURL(url);
         }
+        */
         Input.location.Start(10f, 0.1f);
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         databaseReference.OrderByChild("requests").ChildAdded += HandleChildAdded;
@@ -169,6 +171,7 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(Init());
         */
     }
+    /*
     private void OnApplicationPause(bool pause)
     {
         if (!pause)
@@ -184,6 +187,7 @@ public class MainMenuManager : MonoBehaviour
             }
         }
     }
+    */
     /*
     IEnumerator Init()
     {
