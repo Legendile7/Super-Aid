@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "494434263518",
+    "firebase_url": "https://supergency-default-rtdb.firebaseio.com",
+    "project_id": "supergency",
+    "storage_bucket": "supergency.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494434263518:android:482930f233f6c09aa2bd4f",
+        "android_client_info": {
+          "package_name": "com.overshock.supergency"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtsiqd0qHloqMEcVKqblXdTJxSUye-2Zw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
