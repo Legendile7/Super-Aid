@@ -8,6 +8,7 @@ using UnityEngine.Android;
 using Unity.Notifications;
 using System;
 using UnityEngine.SceneManagement;
+using VoxelBusters.EssentialKit;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -126,12 +127,25 @@ public class MainMenuManager : MonoBehaviour
     void SendNotification(float distanceValue, string origin, string destination)
     {
         Debug.Log("Sending notification");
+        /*
         var notification = new AndroidNotification();
         notification.Title = "NEW ALERT!";
         notification.Text = "A new help request is available in your area. Distance: " + distanceValue + " miles";
         notification.FireTime = System.DateTime.Now.AddSeconds(1);
         notification.IntentData = "&origin=" + origin + "&destination=" + destination;
         var id = AndroidNotificationCenter.SendNotification(notification, "default");
+        */
+        AlertDialog dialog = AlertDialog.CreateInstance();
+        dialog.Title = "NEW ALERT!";
+        dialog.Message = "A new help request is available in your area. Distance: " + distanceValue + " miles";
+        dialog.AddButton("View Directions", () => {
+            Debug.Log("Yes button clicked");
+            Application.OpenURL("https://www.google.com/maps/dir/?api=1" + "&origin=" + origin + "&destination=" + destination);
+        });
+        dialog.AddCancelButton("Dismiss", () => {
+            Debug.Log("Cancel button clicked");
+        });
+        dialog.Show(); //Show the dialog
     }
     private void Start()
     {
@@ -146,12 +160,14 @@ public class MainMenuManager : MonoBehaviour
         Input.location.Start(10f, 0.1f);
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         databaseReference.OrderByChild("requests").ChildAdded += HandleChildAdded;
+        /*
         var args = NotificationCenterArgs.Default;
         args.AndroidChannelId = "default";
         args.AndroidChannelName = "Notifications";
         args.AndroidChannelDescription = "Main notifications";
         NotificationCenter.Initialize(args);
         StartCoroutine(Init());
+        */
     }
     private void OnApplicationPause(bool pause)
     {
@@ -168,6 +184,7 @@ public class MainMenuManager : MonoBehaviour
             }
         }
     }
+    /*
     IEnumerator Init()
     {
         var request = NotificationCenter.RequestPermission();
@@ -189,6 +206,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log($"{permissionName} PermissionCallbacks_PermissionDenied");
     }
+    */
     void HandleChildAdded(object sender, ChildChangedEventArgs args)
     {
         if (args.DatabaseError != null)
