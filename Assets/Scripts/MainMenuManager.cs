@@ -25,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
     public bool debugCoords;
     public float debugLatitude;
     public float debugLongitude;
+    public bool debugDistance;
 
     //Actual non debug vars
     [Header("Changing these only works in windows editor")]
@@ -121,9 +122,12 @@ public class MainMenuManager : MonoBehaviour
                     else
                     {
                         Debug.Log("Duration is more than 10 minutes.");
-                        float distanceValue = response.rows[0].elements[0].distance.value;
-                        float miles = distanceValue / 1609.344f;
-                        SendNotification(miles, origins, destinations);
+                        if (debugDistance)
+                        {
+                            float distanceValue = response.rows[0].elements[0].distance.value;
+                            float miles = distanceValue / 1609.344f;
+                            SendNotification(miles, origins, destinations);
+                        }
                     }
                 }
                 else
@@ -259,32 +263,35 @@ public class MainMenuManager : MonoBehaviour
             int idEndIndex = childValue.IndexOf('"', idStartIndex);
             string newId = childValue.Substring(idStartIndex, idEndIndex - idStartIndex);
 
-            // Extracting latitude
-            int latStartIndex = childValue.IndexOf("latitude") + "latitude".Length + 2; // Adding 2 for ": "
-            int latEndIndex = childValue.IndexOf(",", latStartIndex);
-            string latitudeStr = childValue.Substring(latStartIndex, latEndIndex - latStartIndex);
-            recLatitude = float.Parse(latitudeStr);
+            if (disableDuplicateIdCheck || !string.Equals(newId, userID))
+            {
+                // Extracting latitude
+                int latStartIndex = childValue.IndexOf("latitude") + "latitude".Length + 2; // Adding 2 for ": "
+                int latEndIndex = childValue.IndexOf(",", latStartIndex);
+                string latitudeStr = childValue.Substring(latStartIndex, latEndIndex - latStartIndex);
+                recLatitude = float.Parse(latitudeStr);
 
-            // Extracting longitude
-            int lonStartIndex = childValue.IndexOf("longitude") + "longitude".Length + 2; // Adding 2 for ": "
-            int lonEndIndex = childValue.IndexOf("}", lonStartIndex);
-            string longitudeStr = childValue.Substring(lonStartIndex, lonEndIndex - lonStartIndex);
-            recLongitude = float.Parse(longitudeStr);
+                // Extracting longitude
+                int lonStartIndex = childValue.IndexOf("longitude") + "longitude".Length + 2; // Adding 2 for ": "
+                int lonEndIndex = childValue.IndexOf("}", lonStartIndex);
+                string longitudeStr = childValue.Substring(lonStartIndex, lonEndIndex - lonStartIndex);
+                recLongitude = float.Parse(longitudeStr);
 
 
 
-            // Now you can use the parsed values
-            Debug.Log("ID: " + newId);
-            Debug.Log("Latitude: " + latitude);
-            Debug.Log("Longitude: " + longitude);
+                // Now you can use the parsed values
+                Debug.Log("ID: " + newId);
+                Debug.Log("Latitude: " + latitude);
+                Debug.Log("Longitude: " + longitude);
 
-            Debug.Log("Latitude: " + latitude + ", Longitude: " + longitude);
-            GetLocationOnListen();
-            string origin = latitude + "," + longitude;
-            Debug.Log("Origin: " + origin);
-            string destination = recLatitude + "," + recLongitude;
-            Debug.Log("Destination: " + destination);
-            StartCoroutine(SendRequest(origin, destination));
+                Debug.Log("Latitude: " + latitude + ", Longitude: " + longitude);
+                GetLocationOnListen();
+                string origin = latitude + "," + longitude;
+                Debug.Log("Origin: " + origin);
+                string destination = recLatitude + "," + recLongitude;
+                Debug.Log("Destination: " + destination);
+                StartCoroutine(SendRequest(origin, destination));
+            }
         }
         else
             counter = 1;

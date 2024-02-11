@@ -843,12 +843,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 1200388107}
-  disableDuplicateIdCheck: 1
+  disableDuplicateIdCheck: 0
   debugUserID: 0
   userID: 
   debugCoords: 1
-  debugLatitude: 33.75375
-  debugLongitude: -84.38633
+  debugLatitude: 33.94828
+  debugLongitude: -83.3795
+  debugDistance: 0
   latitude: 35
   longitude: -85
 --- !u!4 &1016405308
