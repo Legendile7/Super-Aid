@@ -1,1 +1,34 @@
-Team Members:Anvith BekalIshaan ChitreDivesh GuptaPurpose of the project:The Super Aid app is created to provide quick help in the form of volunteers to anyone who’s in an emergency. The emergencies can range from a flat tire to a serious health issue. Whether you’re a common bystander or the one facing the emergency, our app ensures that nearby community help shortly arrive at the scene.  Tools Utilized:- Firebase- Unity- C#- Google Maps directions API- Json- GitHub- Android - TrelloProblems that we encountered:The biggest problem that our team encountered was learning the majority of the backend logic required for the application. Our team had minimal experience with any kind of database or server. After shortlisting some potential databases that we could learn about in the next 36 hours, we decided to use Google’s Firebase because of its countless features. We overcame our biggest challenge by simply reading as much of the documentation as possible. Public Frameworks we used:- Unity- Google Maps Distance Matrix- Google Maps Directions- Unity Location Services- Firebase Authentication- Firebase Realtime Database- Voxel Busters Alert Notifications- Pixabay- Termly
+# Super Aid
+![SuperAidLogo](https://github.com/Legendile7/Super-Aid/assets/56519032/e198071d-fbc7-4ef4-a58d-aaa7d97024e6)
+
+
+## Team Members:
+- Anvith Bekal
+- Ishaan Chitre
+- Divesh Gupta
+
+## Purpose:
+The Super Aid app is designed to offer rapid assistance through volunteers to individuals facing emergencies, ranging from minor inconveniences like a flat tire to critical health issues. Whether you're a bystander or directly involved, our app ensures swift community support arrives at the scene.
+
+## Tools Utilized:
+- Firebase for backend functionality
+- Unity for app development
+- C# for programming
+- Google Maps Directions API for navigation
+- JSON for data exchange
+- GitHub for version control
+- Android for mobile platform
+- Trello for project management
+
+## Challenges Faced:
+Our team encountered a significant learning curve in understanding the backend logic required for the application. With minimal prior experience in database and server technologies, we explored various options and ultimately chose Google Firebase for its extensive features. Overcoming this challenge involved intensive documentation reading and hands-on experimentation within a tight 36-hour timeframe.
+
+## Public Frameworks Used:
+- Unity for application development
+- Google Maps Distance Matrix and Directions for navigation
+- Unity Location Services for geolocation
+- Firebase Authentication for user authentication
+- Firebase Realtime Database for data storage
+- Voxel Busters Alert Notifications for emergency alerts
+- Pixabay for image resources
+- Termly for Terms & Conditions and Privacy Policy
