@@ -9,18 +9,24 @@ using Unity.Notifications;
 using System;
 using UnityEngine.SceneManagement;
 using VoxelBusters.EssentialKit;
+using System.Collections.Generic;
 
 public class MainMenuManager : MonoBehaviour
 {
     DatabaseReference databaseReference;
-    public bool debugMode;
-    public int debugUserID;
+
+    [Header("Debug Options")]
+    public bool disableDuplicateIdCheck;
+    public bool debugUserID;
+    public string userID;
+    public bool debugCoords;
     public float debugLatitude;
     public float debugLongitude;
 
     //Actual non debug vars
-    private float latitude = 0f;
-    private float longitude = 0f;
+    [Header("Changing these only works in windows editor")]
+    public float latitude = 0f;
+    public float longitude = 0f;
 
     float recLatitude = 0f;
     float recLongitude = 0f;
@@ -159,6 +165,10 @@ public class MainMenuManager : MonoBehaviour
             Application.OpenURL(url);
         }
         */
+        if (!debugUserID)
+        {
+            userID = PlayerPrefs.GetString("UID", "0");
+        }
         Input.location.Start(10f, 0.1f);
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         databaseReference.OrderByChild("requests").ChildAdded += HandleChildAdded;
@@ -171,6 +181,7 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(Init());
         */
     }
+
     /*
     private void OnApplicationPause(bool pause)
     {
@@ -211,6 +222,12 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log($"{permissionName} PermissionCallbacks_PermissionDenied");
     }
     */
+    [System.Serializable]
+    public class UserLocation
+    {
+        public float latitude;
+        public float longitude;
+    }
     void HandleChildAdded(object sender, ChildChangedEventArgs args)
     {
         if (args.DatabaseError != null)
@@ -225,17 +242,26 @@ public class MainMenuManager : MonoBehaviour
             string childKey = snapshot.Key;
             string childValue = snapshot.GetRawJsonValue();
 
-            Debug.Log("Child added: Key = " + childKey + ", Value = " + childValue);
-            // Assuming childValue is formatted as "[{"latitude":315,"longitude":123}]"
-            // Remove the square brackets to get the actual JSON object
-            string jsonObject = childValue.Trim('[', ']');
+            Debug.Log("Child added: Key = " + childKey  + ", Value = " + childValue);
+            Dictionary<string, UserLocation> userLocations = JsonUtility.FromJson<Dictionary<string, UserLocation>>(childValue);
+            Debug.Log(userLocations);
+            float latitude = 0f, longitude = 0f;
+            string userIDrecieved = "";
+            // Access each user's location using the user ID
+            foreach (var entry in userLocations)
+            {
+                userIDrecieved = entry.Key;
+                UserLocation location = entry.Value;
 
-            // Deserialize the JSON object using JsonUtility
-            LocationData locationData = JsonUtility.FromJson<LocationData>(jsonObject);
+                latitude = location.latitude;
+                longitude = location.longitude;
 
-            // Access latitude and longitude
-            recLatitude = locationData.latitude;
-            recLongitude = locationData.longitude;
+                Debug.Log("UserID: " + userIDrecieved);
+                Debug.Log("Latitude: " + latitude);
+                Debug.Log("Longitude: " + longitude);
+            }
+            if (Equals(userIDrecieved, userID) && !disableDuplicateIdCheck)
+                return;
 
             Debug.Log("Latitude: " + latitude + ", Longitude: " + longitude);
             GetLocationOnListen();
@@ -258,10 +284,10 @@ public class MainMenuManager : MonoBehaviour
     private void writeNewUser()
     {
         Data user = new Data(debugLatitude, debugLongitude); ;
-        if (!debugMode)
+        if (!debugCoords)
             user.SetData(latitude, longitude);
         string json = JsonUtility.ToJson(user);
-        databaseReference.Child("requests").Child(debugUserID.ToString()).RemoveValueAsync().ContinueWith(task =>
+        databaseReference.Child("requests").Child(userID.ToString()).RemoveValueAsync().ContinueWith(task =>
         {
             if (task.IsCompleted)
             {
@@ -272,7 +298,7 @@ public class MainMenuManager : MonoBehaviour
                 Debug.LogError("Failed to remove node: " + ": " + task.Exception);
             }
         });
-        databaseReference.Child("requests").Child(debugUserID.ToString()).SetRawJsonValueAsync(json);
+        databaseReference.Child("requests").Child(userID.ToString()).SetRawJsonValueAsync(json);
     }
     private void GetLocationOnListen()
     {
@@ -302,6 +328,9 @@ public class MainMenuManager : MonoBehaviour
             //Write to database
             writeNewUser();
         }
+#if UNITY_EDITOR_WIN
+        writeNewUser();
+#endif
     }
 
     public void LoadScene(int id)

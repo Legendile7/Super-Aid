@@ -3,9 +3,9 @@
     <type fullname="VoxelBusters.EssentialKit.AddressBookCore.NullAddressBookInterface" preserve="all" />
     <type fullname="VoxelBusters.EssentialKit.NetworkServicesCore.UnityNetworkServicesInterface" preserve="all" />
     <type fullname="VoxelBusters.EssentialKit.SharingServicesCore.NullSharingInterface" preserve="all" />
+    <type fullname="VoxelBusters.EssentialKit.ExtrasCore.NullNativeUtilityInterface" preserve="all" />
   </assembly>
   <assembly fullname="VoxelBusters.EssentialKit.AndroidModule">
     <namespace fullname="VoxelBusters.EssentialKit.NativeUICore.Android" preserve="all" />
-    <namespace fullname="VoxelBusters.EssentialKit.ExtrasCore.Android" preserve="all" />
   </assembly>
 </linker>
