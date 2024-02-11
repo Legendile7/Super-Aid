@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 using VoxelBusters.EssentialKit;
 using System.Collections.Generic;
 using TMPro;
+using Newtonsoft.Json;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -231,6 +232,12 @@ public class MainMenuManager : MonoBehaviour
         public float latitude;
         public float longitude;
     }
+    public void SignOut()
+    {
+        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth.SignOut();
+        SceneManager.LoadScene(0);
+    }
     void HandleChildAdded(object sender, ChildChangedEventArgs args)
     {
         if (args.DatabaseError != null)
@@ -246,25 +253,30 @@ public class MainMenuManager : MonoBehaviour
             string childValue = snapshot.GetRawJsonValue();
 
             Debug.Log("Child added: Key = " + childKey  + ", Value = " + childValue);
-            Dictionary<string, UserLocation> userLocations = JsonUtility.FromJson<Dictionary<string, UserLocation>>(childValue);
-            Debug.Log(userLocations);
-            float latitude = 0f, longitude = 0f;
-            string userIDrecieved = "";
-            // Access each user's location using the user ID
-            foreach (var entry in userLocations)
-            {
-                userIDrecieved = entry.Key;
-                UserLocation location = entry.Value;
 
-                latitude = location.latitude;
-                longitude = location.longitude;
+            //JSON conversion (might fuck up the project)
+            int idStartIndex = childValue.IndexOf('"') + 1;
+            int idEndIndex = childValue.IndexOf('"', idStartIndex);
+            string newId = childValue.Substring(idStartIndex, idEndIndex - idStartIndex);
 
-                Debug.Log("UserID: " + userIDrecieved);
-                Debug.Log("Latitude: " + latitude);
-                Debug.Log("Longitude: " + longitude);
-            }
-            if (Equals(userIDrecieved, userID) && !disableDuplicateIdCheck)
-                return;
+            // Extracting latitude
+            int latStartIndex = childValue.IndexOf("latitude") + "latitude".Length + 2; // Adding 2 for ": "
+            int latEndIndex = childValue.IndexOf(",", latStartIndex);
+            string latitudeStr = childValue.Substring(latStartIndex, latEndIndex - latStartIndex);
+            recLatitude = float.Parse(latitudeStr);
+
+            // Extracting longitude
+            int lonStartIndex = childValue.IndexOf("longitude") + "longitude".Length + 2; // Adding 2 for ": "
+            int lonEndIndex = childValue.IndexOf("}", lonStartIndex);
+            string longitudeStr = childValue.Substring(lonStartIndex, lonEndIndex - lonStartIndex);
+            recLongitude = float.Parse(longitudeStr);
+
+
+
+            // Now you can use the parsed values
+            Debug.Log("ID: " + newId);
+            Debug.Log("Latitude: " + latitude);
+            Debug.Log("Longitude: " + longitude);
 
             Debug.Log("Latitude: " + latitude + ", Longitude: " + longitude);
             GetLocationOnListen();
