@@ -10,9 +10,11 @@ using System;
 using UnityEngine.SceneManagement;
 using VoxelBusters.EssentialKit;
 using System.Collections.Generic;
+using TMPro;
 
 public class MainMenuManager : MonoBehaviour
 {
+    public TMP_Text nameText;
     DatabaseReference databaseReference;
 
     [Header("Debug Options")]
@@ -165,6 +167,7 @@ public class MainMenuManager : MonoBehaviour
             Application.OpenURL(url);
         }
         */
+        nameText.text = "Hello " + PlayerPrefs.GetString("SavedName", "User") + "!";
         if (!debugUserID)
         {
             userID = PlayerPrefs.GetString("UID", "0");
