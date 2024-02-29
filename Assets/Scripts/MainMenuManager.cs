@@ -2,16 +2,10 @@ using UnityEngine;
 using Firebase.Database;
 using System.Collections;
 using UnityEngine.Networking;
-using Google.MiniJSON;
-using Unity.Notifications.Android;
-using UnityEngine.Android;
-using Unity.Notifications;
 using System;
 using UnityEngine.SceneManagement;
 using VoxelBusters.EssentialKit;
-using System.Collections.Generic;
 using TMPro;
-using Newtonsoft.Json;
 
 public class MainMenuManager : MonoBehaviour
 {
